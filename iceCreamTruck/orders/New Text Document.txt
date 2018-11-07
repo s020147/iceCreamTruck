@@ -1,0 +1,8 @@
+from django import forms
+
+class OrderForm(forms.Form):
+    question_text = forms.CharField(max_length=200)
+    product_id = forms.IntegerField(default=0)
+    quantity = forms.IntegerField(default=0)
+    total_cost= forms.IntegerField(default=0)
+    current_date = forms.DateTimeField('current date')
