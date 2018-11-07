@@ -5,6 +5,7 @@
 	<li><a href="{% url 'orders:detail' order.id %}">{{ order.id }}</a></li>
     {% endfor %}
     </ul>
+<h1><a href="{% url 'orders:input' %}">Fill in Order Form</h1>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
