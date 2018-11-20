@@ -5,7 +5,7 @@ from django.utils import timezone
 
 
 class OrderForm(models.Model):
-    question_text = models.CharField(max_length=200)
+    flavor = models.CharField(max_length=200)
     product_id = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
     total_cost= models.IntegerField(default=0)

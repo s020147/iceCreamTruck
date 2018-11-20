@@ -14,7 +14,7 @@ def detail(request, order_id):
     order = get_object_or_404(OrderForm, pk=order_id)
     return render(request,'orders/detail.html',{'order':order})
 def results(request, order_id):
-    response = "You're looking at the results of question %s."
+    response = "You're looking at the results of the order %s."
     return HttpResponse(response % order_id)
 def input(request):
     if  request.method == "Post":
