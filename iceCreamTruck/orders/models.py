@@ -2,14 +2,17 @@ import datetime
 
 from django.db import models
 from django.utils import timezone
-
+from customers.models import Customer
 
 class OrderForm(models.Model):
-    flavor = models.CharField(max_length=200)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE,) 
+    flavor = models.IntegerField(default=0)
     product_id = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
     total_cost= models.IntegerField(default=0)
     current_date = models.DateTimeField('current date')
+    
+
     def __str__(self):
         return self.id
     def was_ordered_recently(self):
