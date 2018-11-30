@@ -9,19 +9,19 @@ class OrderForm(models.Model):
     flavor = models.IntegerField(default=0)
     product_id = models.IntegerField(default=0)
     quantity = models.IntegerField(default=0)
-    total_cost= models.IntegerField(default=0)
-    current_date = models.DateTimeField('current date')
+    date_created = models.DateTimeField(auto_now_add = True)
+    date_updated = models.DateTimeField(auto_now = True)
     
-
-    def __str__(self):
-        return self.id
-    def was_ordered_recently(self):
-        return self.current_date >= timezone.now()-datetime.timedelta
     
+    @property
+    def total_cost(self):
+        return '%s%s%s' % ('$', self.quantity * 50, '.00')
+    
+    @property
+    def name(self):
+        return '%s %s' % (self.customer.first_Name, self.customer.last_Name)
+    @property
+    def customer_i_d(self):
+        return '%s' % (str(self.customer.customer_id).zfill(6),)
 
-class Choice(models.Model):
-    question = models.ForeignKey(OrderForm,on_delete=models.CASCADE)
-    choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
-    def __str__(self):
-        return self.choice_text
+
