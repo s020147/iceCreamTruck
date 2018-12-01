@@ -5,6 +5,7 @@ from django.utils import timezone
 from customers.models import Customer
 
 class OrderForm(models.Model):
+    order_i_d = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE,) 
     flavor = models.IntegerField(default=0)
     product_id = models.IntegerField(default=0)
@@ -19,9 +20,14 @@ class OrderForm(models.Model):
     @property
     def name(self):
         return '%s %s' % (self.customer.first_Name, self.customer.last_Name)
+        
     @property
-    def customer_i_d(self):
-        return '%s' % (str(self.customer.customer_id).zfill(6),)
+    def _customer_id(self):
+        return '%s' % (str(self.customer.customer_i_d).zfill(6),)
+
+    @property
+    def _order_id(self):
+        return '%s' % (str(self.order_i_d).zfill(6),)
 
 #货物信息表
 class ProductForm(models.Model):
