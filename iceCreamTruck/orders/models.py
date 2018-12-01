@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 from customers.models import Customer
 from products.models import Product
+from django.core.exceptions import ValidationError
 
 class OrderForm(models.Model):
     order_i_d = models.AutoField(primary_key=True)
@@ -12,6 +13,11 @@ class OrderForm(models.Model):
     quantity = models.IntegerField(default=0)
     date_created = models.DateTimeField(auto_now_add = True)
     date_updated = models.DateTimeField(auto_now = True)
+    
+    def clean(self):
+        from django.core.exceptions import ValidationError
+        if self.quantity > self.flavor.quantity_stocked:
+            raise ValidationError('Not enough product stocked.')
     
     @property
     def _product_id(self):
