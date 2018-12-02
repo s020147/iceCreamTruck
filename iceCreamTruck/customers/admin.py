@@ -7,5 +7,7 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = ('date_created', 'date_updated',)
 
 
-
+admin.site.site_header = 'Cream Blue Incorporated'
+admin.site.index_title = 'Welcome'
+admin.site.site_title = 'Cream Blue'
 admin.site.register(Customer, CustomerAdmin)
